@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ItemTodo from './ItemTodo'
+import InputTodo from './InputTodo'
 
 const init = [{
   contents: "hello"
@@ -19,6 +20,7 @@ const Main: React.FC = () => {
   return (
     <div>
       <h1>Todo List</h1>
+      <p><InputTodo /></p>
       {todo.map((todo) =>
         <ItemTodo contents={todo.contents} />)}
     </div>
