@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ItemTodo from './ItemTodo'
 
 const init = [{
   contents: "hello"
@@ -7,9 +8,14 @@ const init = [{
   contents: "world"
 }]
 
+interface TodoInterface {
+  contents: string
+}
+
 const Main: React.FC = () => {
 
   const [todo, setTodo] = useState(init)
+
   return (
     <div>
       <h1>Todo List</h1>
