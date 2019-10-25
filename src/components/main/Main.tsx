@@ -19,7 +19,8 @@ const Main: React.FC = () => {
   return (
     <div>
       <h1>Todo List</h1>
-      {todo.map((todo) => todo.contents)}
+      {todo.map((todo) =>
+        <ItemTodo contents={todo.contents} />)}
     </div>
   );
 }

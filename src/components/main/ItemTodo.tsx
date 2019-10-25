@@ -1,9 +1,13 @@
 import React from 'react'
 
-function ItemTodo() {
+interface Props {
+    contents: string
+}
+
+function ItemTodo(props: Props) {
     return (
         <div>
-            
+            {props.contents}
         </div>
     )
 }
