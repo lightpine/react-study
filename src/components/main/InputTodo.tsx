@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function InputTodo() {
+
+    const [todo, setTodo] = useState("")
+
     return (
         <div>
-            <input />
+            <input value={todo}
+                onChange={(event) => setTodo(event.target.value)} />
+            {console.log(todo)}
         </div>
     )
 }
