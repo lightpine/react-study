@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import ItemTodo from './ItemTodo'
 import InputTodo from './InputTodo'
-import { string } from 'prop-types'
 
 const init = [{
-  contents: "hello"
+  contents: "hello",
+  isCheck: false
 },
 {
-  contents: "world"
+  contents: "world",
+  isCheck: false
 }]
 
 export interface TodoInterface {
   contents: string
+  isCheck: boolean
 }
 
 const Main: React.FC = () => {
@@ -19,7 +21,18 @@ const Main: React.FC = () => {
   const [todo, setTodo] = useState(init)
 
   const handleInputTodo = (contents: string) => {
-    setTodo([{ contents: contents }].concat(todo))
+    setTodo([{ contents: contents, isCheck: false }].concat(todo))
+  }
+
+  const handleClick = (index: number) => {
+    const newTodo = todo.slice()
+
+    newTodo.splice(index, 1, {
+      ...newTodo[index],
+      isCheck: !newTodo[index].isCheck
+    })
+    setTodo(newTodo)
+
   }
 
 
@@ -27,8 +40,12 @@ const Main: React.FC = () => {
     <div>
       <h1>Todo List</h1>
       <p><InputTodo handleInputTodo={handleInputTodo} /></p>
-      {todo.map((todo) =>
-        <ItemTodo contents={todo.contents} />)}
+      {todo.map((todo, index) =>
+        <ItemTodo
+          todo={todo}
+          index={index}
+          handleClick={handleClick}
+          key={index} />)}
     </div>
   );
 }
