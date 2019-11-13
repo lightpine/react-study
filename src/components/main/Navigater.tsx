@@ -7,14 +7,35 @@ const Wapper = styled.div`
     grid-auto-rows: auto;
     grid-gap: 1rem;
 `
+const NaviIcon = styled.div`
+    grid-column: 1 / 6;
+`
+const NaviCover = styled.div`
+    grid-column: 6;
+`
+const NaviContents = styled.div`
+    grid-column: 8;
+`
+const NaviContact = styled.div`
+    grid-column: 10;
+`
+const NaviLanguage = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 12;
+`
+const NaviEng = styled.div`
+    grid-column: 2;
+`
 
 const Navigater = () => {
     return (
         <Wapper>
-            <div>this is navigater</div>
-            <div>menw1</div>
-            <div>menw2</div>
-            <div>menw3</div>
+            <NaviIcon>this is navigater</NaviIcon>
+            <NaviCover>menw1</NaviCover>
+            <NaviContents>menw2</NaviContents>
+            <NaviContact>menw3</NaviContact>
+            <NaviLanguage>Kr<NaviEng>Eng</NaviEng></NaviLanguage>
         </Wapper>
     )
 }
