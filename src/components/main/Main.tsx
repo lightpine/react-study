@@ -3,6 +3,7 @@ import Navigater from './Navigater'
 import styled from 'styled-components';
 
 const Wapper = styled.div`
+  background-color: ${props => props.theme.main.background_color};
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-auto-rows: auto;

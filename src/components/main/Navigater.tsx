@@ -1,13 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import logo from '../Image/ohn.png'
 
 const Wapper = styled.div`
     display:grid;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: auto;
     grid-gap: 1rem;
+    align-items: center;
 `
-const NaviIcon = styled.div`
+const NaviIcon = styled.img`
+    width: 5rem;
+    height: auto;
     grid-column: 1 / 6;
 `
 const NaviCover = styled.div`
@@ -23,6 +27,7 @@ const NaviLanguage = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column: 12;
+    justify-items: center;
 `
 const NaviEng = styled.div`
     grid-column: 2;
@@ -31,7 +36,7 @@ const NaviEng = styled.div`
 const Navigater = () => {
     return (
         <Wapper>
-            <NaviIcon>this is navigater</NaviIcon>
+            <NaviIcon src={logo} />
             <NaviCover>menw1</NaviCover>
             <NaviContents>menw2</NaviContents>
             <NaviContact>menw3</NaviContact>
