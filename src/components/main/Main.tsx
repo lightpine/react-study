@@ -1,14 +1,28 @@
 import React from 'react'
 import Navigater from './Navigater'
+import styled from 'styled-components';
+
+const Wapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+`
+
+const NaviWapper = styled.div`
+  grid-column: 1 / 13;
+`
 
 const Main: React.FC = () => {
   return (
-    <div>
-      <Navigater />
+    <Wapper>
+      <NaviWapper>
+        <Navigater />
+      </NaviWapper>
       <div>cover</div>
       <div>contents</div>
       <div>contact</div>
-    </div>
+    </Wapper>
   );
 }
 
