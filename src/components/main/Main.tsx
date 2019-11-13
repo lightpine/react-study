@@ -2,18 +2,6 @@ import React, { useRef, useState, useEffect } from 'react'
 import Navigater from './Navigater'
 import styled from 'styled-components';
 
-const Wapper = styled.div`
-  background-color: ${props => props.theme.main.background_color};
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: auto;
-  grid-gap: 1rem;
-`
-
-const NaviWapper = styled.div`
-  grid-column: 1 / 13;
-`
-
 const Main: React.FC = () => {
 
   const gridRef = useRef<HTMLDivElement>(null)
@@ -23,7 +11,8 @@ const Main: React.FC = () => {
     const gridEl = gridRef.current
     if (gridEl) {
       const gridRect = gridEl.getBoundingClientRect()
-      setGridSize(gridRect.width)
+      const gridPiceSize = (gridRect.width - (10 * 11)) / 12
+      setGridSize(gridPiceSize)
     }
   }, [])
 
@@ -39,6 +28,18 @@ const Main: React.FC = () => {
     window.addEventListener("resize", reSize)
     return () => { window.removeEventListener("resiz", reSize) };
   }, [])
+
+  const Wapper = styled.div`
+    background-color: ${props => props.theme.main.background_color};
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
+  `
+
+  const NaviWapper = styled.div`
+    grid-column: 1 / 13;
+  `
 
   return (
     <Wapper ref={gridRef}>
