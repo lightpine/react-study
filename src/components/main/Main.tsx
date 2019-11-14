@@ -4,11 +4,12 @@ import styled from 'styled-components';
 
 const Main: React.FC = () => {
 
-  const gridRef = useRef<HTMLDivElement>(null)
+  const browserRef = useRef<HTMLDivElement>(null)
   const [gridSize, setGridSize] = useState(0)
+  const [browserSize, setBrowserSize] = useState(0)
 
   useEffect(() => {
-    const gridEl = gridRef.current
+    const gridEl = browserRef.current
     if (gridEl) {
       const gridRect = gridEl.getBoundingClientRect()
       const gridPiceSize = (gridRect.width - (10 * 11)) / 12
@@ -18,7 +19,7 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     const reSize = () => {
-      const gridEl = gridRef.current
+      const gridEl = browserRef.current
       if (gridEl) {
         const gridRect = gridEl.getBoundingClientRect()
         const gridPiceSize = (gridRect.width - (10 * 11)) / 12
@@ -27,6 +28,32 @@ const Main: React.FC = () => {
     }
     window.addEventListener("resize", reSize)
     return () => { window.removeEventListener("resiz", reSize) };
+  }, [])
+
+  useEffect(() => {
+    const browserSize = browserRef.current
+    if (browserSize) {
+      // const innerSize = window.innerWidth
+      const browserrect = browserSize.getBoundingClientRect()
+      const browserWidth = browserrect.width
+      setBrowserSize(browserWidth)
+    }
+  }, [])
+
+  useEffect(() => {
+    const reSize = () => {
+      const browserSize = browserRef.current
+      if (browserSize) {
+        // const innerSize = window.innerWidth
+        const browserrect = browserSize.getBoundingClientRect()
+        const browserWidth = browserrect.width
+        setBrowserSize(browserWidth)
+      }
+    }
+    window.addEventListener("resize", reSize)
+    return () => {
+      window.removeEventListener("resize", reSize)
+    };
   }, [])
 
   const Wapper = styled.div`
@@ -42,7 +69,7 @@ const Main: React.FC = () => {
   `
 
   return (
-    <Wapper ref={gridRef}>
+    <Wapper ref={browserRef}>
       <NaviWapper>
         <Navigater gridSize={gridSize} />
       </NaviWapper>
