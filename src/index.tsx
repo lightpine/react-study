@@ -28,7 +28,8 @@ const GlobalStyle = createGlobalStyle`
 `
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-        <Main />
-    </ThemeProvider>
-    , document.getElementById('root'))
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    <Main />
+  </ThemeProvider>
+  , document.getElementById('root'))

@@ -1,14 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Navigater from './Navigater'
+import Cover from './Cover'
 import styled from 'styled-components';
 
 const Main: React.FC = () => {
 
-  const gridRef = useRef<HTMLDivElement>(null)
+  const browserRef = useRef<HTMLDivElement>(null)
   const [gridSize, setGridSize] = useState(0)
+  // const [browserSize, setBrowserSize] = useState(0)
 
   useEffect(() => {
-    const gridEl = gridRef.current
+    const gridEl = browserRef.current
     if (gridEl) {
       const gridRect = gridEl.getBoundingClientRect()
       const gridPiceSize = (gridRect.width - (10 * 11)) / 12
@@ -18,7 +20,7 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     const reSize = () => {
-      const gridEl = gridRef.current
+      const gridEl = browserRef.current
       if (gridEl) {
         const gridRect = gridEl.getBoundingClientRect()
         const gridPiceSize = (gridRect.width - (10 * 11)) / 12
@@ -29,6 +31,30 @@ const Main: React.FC = () => {
     return () => { window.removeEventListener("resiz", reSize) };
   }, [])
 
+  // useEffect(() => {
+  //   const browserSize = browserRef.current
+  //   if (browserSize) {
+  //     const browserrect = browserSize.getBoundingClientRect()
+  //     const browserWidth = browserrect.width
+  //     setBrowserSize(browserWidth)
+  //   }
+  // }, [])
+
+  // useEffect(() => {
+  //   const reSize = () => {
+  //     const browserSize = browserRef.current
+  //     if (browserSize) {
+  //       const browserrect = browserSize.getBoundingClientRect()
+  //       const browserWidth = browserrect.width
+  //       setBrowserSize(browserWidth)
+  //     }
+  //   }
+  //   window.addEventListener("resize", reSize)
+  //   return () => {
+  //     window.removeEventListener("resize", reSize)
+  //   };
+  // }, [])
+
   const Wapper = styled.div`
     background-color: ${props => props.theme.main.background_color};
     display: grid;
@@ -38,15 +64,22 @@ const Main: React.FC = () => {
   `
 
   const NaviWapper = styled.div`
+    background-color: ${props => props.theme.main.background_color};
     grid-column: 1 / 13;
+    position:sticky;
+    top: 0;
+    grid-row: 1;
+    z-index: 1000;
   `
 
   return (
-    <Wapper ref={gridRef}>
+    <Wapper ref={browserRef}>
       <NaviWapper>
-        <Navigater gridSize={gridSize} />
+        <Navigater
+          gridSize={gridSize}
+        />
       </NaviWapper>
-      <div>cover</div>
+      <Cover />
       <div>contents</div>
       <div>contact</div>
     </Wapper>
