@@ -6,7 +6,7 @@ const Main: React.FC = () => {
 
   const browserRef = useRef<HTMLDivElement>(null)
   const [gridSize, setGridSize] = useState(0)
-  const [browserSize, setBrowserSize] = useState(0)
+  // const [browserSize, setBrowserSize] = useState(0)
 
   useEffect(() => {
     const gridEl = browserRef.current
@@ -30,31 +30,29 @@ const Main: React.FC = () => {
     return () => { window.removeEventListener("resiz", reSize) };
   }, [])
 
-  useEffect(() => {
-    const browserSize = browserRef.current
-    if (browserSize) {
-      // const innerSize = window.innerWidth
-      const browserrect = browserSize.getBoundingClientRect()
-      const browserWidth = browserrect.width
-      setBrowserSize(browserWidth)
-    }
-  }, [])
+  // useEffect(() => {
+  //   const browserSize = browserRef.current
+  //   if (browserSize) {
+  //     const browserrect = browserSize.getBoundingClientRect()
+  //     const browserWidth = browserrect.width
+  //     setBrowserSize(browserWidth)
+  //   }
+  // }, [])
 
-  useEffect(() => {
-    const reSize = () => {
-      const browserSize = browserRef.current
-      if (browserSize) {
-        // const innerSize = window.innerWidth
-        const browserrect = browserSize.getBoundingClientRect()
-        const browserWidth = browserrect.width
-        setBrowserSize(browserWidth)
-      }
-    }
-    window.addEventListener("resize", reSize)
-    return () => {
-      window.removeEventListener("resize", reSize)
-    };
-  }, [])
+  // useEffect(() => {
+  //   const reSize = () => {
+  //     const browserSize = browserRef.current
+  //     if (browserSize) {
+  //       const browserrect = browserSize.getBoundingClientRect()
+  //       const browserWidth = browserrect.width
+  //       setBrowserSize(browserWidth)
+  //     }
+  //   }
+  //   window.addEventListener("resize", reSize)
+  //   return () => {
+  //     window.removeEventListener("resize", reSize)
+  //   };
+  // }, [])
 
   const Wapper = styled.div`
     background-color: ${props => props.theme.main.background_color};
@@ -73,7 +71,6 @@ const Main: React.FC = () => {
       <NaviWapper>
         <Navigater
           gridSize={gridSize}
-          browserSize={browserSize}
         />
       </NaviWapper>
       <div>cover</div>
