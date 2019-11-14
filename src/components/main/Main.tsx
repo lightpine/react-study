@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
+import styled from 'styled-components';
 import Navigater from './Navigater'
 import Cover from './Cover'
-import styled from 'styled-components';
+import Contents from './Contents'
 
 const Main: React.FC = () => {
 
@@ -80,7 +81,7 @@ const Main: React.FC = () => {
         />
       </NaviWapper>
       <Cover />
-      <div>contents</div>
+      <Contents />
       <div>contact</div>
     </Wapper>
   );
