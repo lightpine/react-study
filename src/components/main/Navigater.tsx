@@ -3,54 +3,63 @@ import styled from 'styled-components'
 import logo from '../Image/ohn.png'
 
 interface Props {
-    gridSize: number
+  gridSize: number
 }
 
 const Navigater: React.FC<Props> = (props) => {
 
-    const { gridSize } = props
+  const { gridSize } = props
 
-    const Wapper = styled.div`
+  const Wapper = styled.div`
     display:grid;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: auto;
     grid-gap: 1rem;
     align-items: center;
   `
-    const NaviIcon = styled.img`
+  const NaviIcon = styled.img`
     width: 5rem;
     height: auto;
     grid-column: 1 / 6;
     padding-left:${ gridSize / 2}px;
   `
-    const NaviCover = styled.div`
-    grid-column: 6;
+  const NaviCover = styled.div`
+    grid-column: 1;
   `
-    const NaviContents = styled.div`
-    grid-column: 8;
+  const NaviContents = styled.div`
+    grid-column: 3;
   `
-    const NaviContact = styled.div`
-    grid-column: 10;
+  const NaviContact = styled.div`
+    grid-column: 5;
   `
-    const NaviLanguage = styled.div`
+  const NaviLanguage = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column: 12;
     justify-items: center;
   `
-    const NaviEng = styled.div`
+  const NaviEng = styled.div`
     grid-column: 2;
   `
+  const MenwBugerWapper = styled.div`
+    grid-column: 6 / 12;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
+  `
 
-    return (
-        <Wapper>
-            <NaviIcon src={logo} />
-            <NaviCover>menw1</NaviCover>
-            <NaviContents>menw2</NaviContents>
-            <NaviContact>menw3</NaviContact>
-            <NaviLanguage>Kr<NaviEng>Eng</NaviEng></NaviLanguage>
-        </Wapper>
-    )
+  return (
+    <Wapper>
+      <NaviIcon src={logo} />
+      <MenwBugerWapper>
+        <NaviCover>menw1</NaviCover>
+        <NaviContents>menw2</NaviContents>
+        <NaviContact>menw3</NaviContact>
+      </MenwBugerWapper>
+      <NaviLanguage>Kr<NaviEng>Eng</NaviEng></NaviLanguage>
+    </Wapper>
+  )
 }
 
 export default Navigater
