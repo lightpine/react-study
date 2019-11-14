@@ -10,6 +10,10 @@ const Navigater: React.FC<Props> = (props) => {
 
   const { gridSize } = props
 
+  const onClick = () => {
+    
+  }
+
   const Wapper = styled.div`
     display:grid;
     grid-template-columns: repeat(12, 1fr);
@@ -96,7 +100,7 @@ const Navigater: React.FC<Props> = (props) => {
         <NaviContact>menw3</NaviContact>
         <NaviLanguage>Kr<NaviEng>Eng</NaviEng></NaviLanguage>
       </MenwBugerWapper>
-      <Hambuger>click</Hambuger>
+      <Hambuger onClick={onClick}>click</Hambuger>
     </Wapper>
   )
 }
