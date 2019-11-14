@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Navigater from './Navigater'
+import Cover from './Cover'
 import styled from 'styled-components';
 
 const Main: React.FC = () => {
@@ -63,7 +64,12 @@ const Main: React.FC = () => {
   `
 
   const NaviWapper = styled.div`
+    background-color: ${props => props.theme.main.background_color};
     grid-column: 1 / 13;
+    position:sticky;
+    top: 0;
+    grid-row: 1;
+    z-index: 1000;
   `
 
   return (
@@ -73,7 +79,7 @@ const Main: React.FC = () => {
           gridSize={gridSize}
         />
       </NaviWapper>
-      <div>cover</div>
+      <Cover />
       <div>contents</div>
       <div>contact</div>
     </Wapper>

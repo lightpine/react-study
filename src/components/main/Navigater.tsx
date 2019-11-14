@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import logo from '../Image/ohn.png'
 
@@ -11,15 +11,15 @@ const Navigater: React.FC<Props> = (props) => {
   const { gridSize } = props
 
   const onClick = () => {
-    
+
   }
 
   const Wapper = styled.div`
     display:grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: auto;
     grid-gap: 1rem;
     align-items: center;
+    font-size: 10px;
   `
   const NaviIcon = styled.img`
     width: 5rem;
@@ -27,16 +27,11 @@ const Navigater: React.FC<Props> = (props) => {
     grid-column: 1 / 6;
     padding-left:${ gridSize / 2}px;
   `
-  const NaviCover = styled.div`
-    grid-column: 1;
-  `
-  const MenwBugerWapper = useCallback(styled.div`
-    display: grid;
+  const MenwBugerWapper = styled.div`
     grid-column: 6 / 13;
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
     grid-gap: 1rem;
-
     @media (max-width: 500px) { 
       display:none;
     }
@@ -50,23 +45,30 @@ const Navigater: React.FC<Props> = (props) => {
     @media (min-width: 1281px) { 
     }
     `
-    , [])
+  const NaviCover = styled.div`
+    grid-column: 1;
+    font-size: ${props => props.theme.navigater.font_size};
+  `
 
   const NaviContents = styled.div`
     grid-column: 3;
+    font-size: ${props => props.theme.navigater.font_size};
   `
   const NaviContact = styled.div`
     grid-column: 5;
+    font-size: ${props => props.theme.navigater.font_size};
   `
   const NaviLanguage = styled.div`
+    grid-column: 7;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-column: 7;
     justify-items: center;
     align-items: center;
+    font-size: ${props => props.theme.navigater.font_size};
   `
   const NaviEng = styled.div`
     grid-column: 2;
+    font-size: ${props => props.theme.navigater.font_size};
   `
   const Hambuger = styled.div`
     @media (max-width: 500px) { 
@@ -83,7 +85,6 @@ const Navigater: React.FC<Props> = (props) => {
     @media (min-width: 768px) and (max-width: 1280px){ 
       display: none;
     } 
-      
     /* Media Query for Large screens */ 
     @media (min-width: 1281px) { 
       display: none;
@@ -95,9 +96,9 @@ const Navigater: React.FC<Props> = (props) => {
     <Wapper>
       <NaviIcon src={logo} />
       <MenwBugerWapper>
-        <NaviCover>menw1</NaviCover>
-        <NaviContents>menw2</NaviContents>
-        <NaviContact>menw3</NaviContact>
+        <NaviCover>Cover</NaviCover>
+        <NaviContents>Contents</NaviContents>
+        <NaviContact>Contact</NaviContact>
         <NaviLanguage>Kr<NaviEng>Eng</NaviEng></NaviLanguage>
       </MenwBugerWapper>
       <Hambuger onClick={onClick}>click</Hambuger>
