@@ -71,7 +71,10 @@ const Main: React.FC = () => {
   return (
     <Wapper ref={browserRef}>
       <NaviWapper>
-        <Navigater gridSize={gridSize} />
+        <Navigater
+          gridSize={gridSize}
+          browserSize={browserSize}
+        />
       </NaviWapper>
       <div>cover</div>
       <div>contents</div>
