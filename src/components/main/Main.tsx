@@ -4,20 +4,21 @@ import Navigater from './Navigater'
 import Cover from './Cover'
 import Contents from './Contents'
 
+export interface WindowSizeInterface {
+  width: number
+  height: number
+}
+
 const Main: React.FC = () => {
+
+  const init: WindowSizeInterface = {
+    width: window.innerWidth,
+    height: window.innerHeight
+  }
 
   const browserRef = useRef<HTMLDivElement>(null)
   const [gridSize, setGridSize] = useState(0)
-  // const [browserSize, setBrowserSize] = useState(0)
-
-  useEffect(() => {
-    const gridEl = browserRef.current
-    if (gridEl) {
-      const gridRect = gridEl.getBoundingClientRect()
-      const gridPiceSize = (gridRect.width - (10 * 11)) / 12
-      setGridSize(gridPiceSize)
-    }
-  }, [])
+  const [winSize, setWinSize] = useState(init)
 
   useEffect(() => {
     const reSize = () => {
@@ -28,33 +29,23 @@ const Main: React.FC = () => {
         setGridSize(gridPiceSize)
       }
     }
+    reSize()
     window.addEventListener("resize", reSize)
     return () => { window.removeEventListener("resiz", reSize) };
   }, [])
 
-  // useEffect(() => {
-  //   const browserSize = browserRef.current
-  //   if (browserSize) {
-  //     const browserrect = browserSize.getBoundingClientRect()
-  //     const browserWidth = browserrect.width
-  //     setBrowserSize(browserWidth)
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   const reSize = () => {
-  //     const browserSize = browserRef.current
-  //     if (browserSize) {
-  //       const browserrect = browserSize.getBoundingClientRect()
-  //       const browserWidth = browserrect.width
-  //       setBrowserSize(browserWidth)
-  //     }
-  //   }
-  //   window.addEventListener("resize", reSize)
-  //   return () => {
-  //     window.removeEventListener("resize", reSize)
-  //   };
-  // }, [])
+  useEffect(() => {
+    const reSize = () => {
+      setWinSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    }
+    window.addEventListener("resize", reSize)
+    return () => {
+      window.removeEventListener("resize", reSize)
+    };
+  }, [])
 
   const Wapper = styled.div`
     background-color: ${props => props.theme.main.background_color};
@@ -62,25 +53,13 @@ const Main: React.FC = () => {
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: auto;
     grid-gap: 1rem;
-  `
-
-  const NaviWapper = styled.div`
-    background-color: ${props => props.theme.main.background_color};
-    grid-column: 1 / 13;
-    position:sticky;
-    top: 0;
-    grid-row: 1;
-    z-index: 1000;
+    width:100%;
   `
 
   return (
     <Wapper ref={browserRef}>
-      <NaviWapper>
-        <Navigater
-          gridSize={gridSize}
-        />
-      </NaviWapper>
-      <Cover />
+      <Navigater gridSize={gridSize} />
+      <Cover windowSize={winSize} />
       <Contents />
       <div>contact</div>
     </Wapper>
