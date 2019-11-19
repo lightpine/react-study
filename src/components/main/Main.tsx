@@ -4,21 +4,21 @@ import Navigater from './Navigater'
 import Cover from './Cover'
 import Contents from './Contents'
 
-export interface WindowSizeInterface {
+export interface SizeInterface {
   width: number
   height: number
 }
 
 const Main: React.FC = () => {
 
-  const init: WindowSizeInterface = {
+  const init: SizeInterface = {
     width: window.innerWidth,
     height: window.innerHeight
   }
 
   const browserRef = useRef<HTMLDivElement>(null)
   const [gridSize, setGridSize] = useState(0)
-  const [winSize, setWinSize] = useState(init)
+  const [sizeChecker, setSizeChecker] = useState(init)
 
   useEffect(() => {
     const reSize = () => {
@@ -27,6 +27,7 @@ const Main: React.FC = () => {
         const gridRect = gridEl.getBoundingClientRect()
         const gridPiceSize = (gridRect.width - (10 * 11)) / 12
         setGridSize(gridPiceSize)
+        console.log(window.document.body.clientHeight);
       }
     }
     reSize()
@@ -36,16 +37,18 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     const reSize = () => {
-      setWinSize({
+      setSizeChecker({
         width: window.innerWidth,
         height: window.innerHeight
       })
     }
+    reSize()
     window.addEventListener("resize", reSize)
     return () => {
       window.removeEventListener("resize", reSize)
     };
   }, [])
+
 
   const Wapper = styled.div`
     background-color: ${props => props.theme.main.background_color};
@@ -59,7 +62,7 @@ const Main: React.FC = () => {
   return (
     <Wapper ref={browserRef}>
       <Navigater gridSize={gridSize} />
-      <Cover windowSize={winSize} />
+      <Cover sizeChecker={sizeChecker} />
       <Contents />
       <div>contact</div>
     </Wapper>

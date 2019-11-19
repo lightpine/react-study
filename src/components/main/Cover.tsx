@@ -1,58 +1,38 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Image from '../Image/back_ground.png'
-import { WindowSizeInterface } from './Main'
+import { SizeInterface } from './Main'
+import { log } from 'util'
 
 interface Props {
-  windowSize: WindowSizeInterface
+  sizeChecker: SizeInterface
 }
 
 const Cover: React.FC<Props> = (props) => {
 
-  const { height, width } = props.windowSize
-  const state = (height < width) ? "garo" : "sero"
-  const imgRef = useRef<HTMLImageElement>(null)
-  const [ss, setss] = useState(false)
-  useEffect(() => {
-    if (imgRef.current) {
-      if (imgRef.current.getBoundingClientRect().height < height) {
-        setss(true)
-      } else {
-        setss(false)
-      }
-    }
-  }, [])
+  const { width, height } = props.sizeChecker
+  const [checker, setCheker] = useState(false)
+
+
   const CoverWapper = styled.div`
     grid-column: 1 / 13;
     grid-row: 1;
-    overflow: hidden;
+    background-image: url(${Image});
     height:100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   `
-  const CoverImg = useCallback((
-    styled.img`
-    position: relative;
-    
-    ${(state === "sero" || ss) ?
-        (`
-        left: 50%;
-        transform: translateX(-50%);
-        height: 100%;
-        width: auto;
-      `) :
-        (`
-        top:50%;
-        transform: translateY(-50%);
-        width:100%;
-        height:auto;
-      `)
-      }
-`
-  )
-    , [])
+  //   const CoverImg = styled.img`
+  //     height: 100%;
+  //     background-position: center;
+  //     background-repeat: no-repeat;
+  //     background-size: cover;
+  // `
 
   return (
     <CoverWapper>
-      <CoverImg ref={imgRef} src={Image} />
+      {/* <CoverImg src={Image} /> */}
     </CoverWapper>
   )
 }
