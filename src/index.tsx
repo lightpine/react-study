@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Main from './components/main/Main'
+import Intercepter from './util/Interceptor'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { theme } from './theme'
+import OhnProvider from './util/OhnProvider'
 
 
 const GlobalStyle = createGlobalStyle`
@@ -14,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${props => props.theme.main.background_color};
   }
   /* root div 중앙 정열 */
-  #root{
+  #Wapper{
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -26,10 +27,15 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     }
 `
+const App: React.FC = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <OhnProvider>
+        <GlobalStyle />
+        <Intercepter />
+      </OhnProvider>
+    </ThemeProvider>
+  )
+}
 
-ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <Main />
-  </ThemeProvider>
-  , document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))

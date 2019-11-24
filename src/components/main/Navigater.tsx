@@ -1,13 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import React, { useState, useEffect } from 'react'
+import styled, { css } from 'styled-components'
 import logo from '../Image/ohn.png'
-import { log } from 'util'
+import { refInterface } from './Main'
 
 interface Props {
   gridSize: number
+  handleClick: (move: number) => void
+  move: refInterface
 }
 
 const Navigater: React.FC<Props> = (props) => {
+
+  const { handleClick, move } = props
+  const { ref2Width, refWidth } = move
   const handleWin = (winsize: number) => {
     if (winsize <= 500) {
       return false
@@ -29,8 +34,8 @@ const Navigater: React.FC<Props> = (props) => {
       <NaviIcon src={logo} gridSize={gridSize} style={{ paddingLeft: gridSize }} />
       <MenwBugerWapper hamClick={hamClick}>
         <Menu col="1 / 3">Cover</Menu>
-        <Menu col="3 / 5">Contents</Menu>
-        <Menu col="5 / 7">Contact</Menu>
+        <Menu col="3 / 5" onClick={() => handleClick(refWidth)}>Contents</Menu>
+        <Menu col="5 / 7" onClick={() => handleClick(ref2Width)}>Contact</Menu>
         <NaviLanguage>Kr<NaviEng>Eng</NaviEng></NaviLanguage>
       </MenwBugerWapper>
       <HanbugerButtonWapper onClick={() => setHamClick(!hamClick)} >
@@ -42,20 +47,22 @@ const Navigater: React.FC<Props> = (props) => {
   )
 }
 export default Navigater
+
 const Wapper = styled.div`
-grid-column: 1 / 13;
-grid-row: 1;
-display:grid;
-grid-template-columns: repeat(12, 1fr);
-grid-gap: 1rem;
-position: sticky;
-top: 0;
-height:100px;
-z-index: 1000;
+  grid-column: 1 / 13;
+  grid-row: 1;
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 1rem;
+  position: sticky;
+  top: 0;
+  height:100px;
+  z-index: 1000;
 `
 const HanbugerButtonWapper = styled.div`
     @media (max-width: 500px) { 
       grid-column: 11/ 12;
+      padding-top: 2rem;
       display: inline-block;
       transition: 0.4s;
     }
@@ -89,17 +96,25 @@ const MenwBugerWapper = styled.div<{ hamClick: boolean }>`
    
     @media (max-width: 500px) { 
       ${p => p.hamClick ? "display: block;" : "display:none;"}
+      grid-column: 1 / 13;
       position:absolute;
       top:0px;
       left:0px;
+      height: 100vmax;
+      width: 100rem;
       background-color:#888888;
+      font-size: 8rem;
     }
-
-    `
-
+  `
 
 const Menu = styled.div<{ col: string }>`
     grid-column:${props => props.col};
+    color: navy;
+    transition: all 0.3;
+    :hover{
+      text-decoration: underline;
+      text-decoration-color: skyblue;
+    }
   `
 
 const NaviLanguage = styled.div`
@@ -107,6 +122,7 @@ const NaviLanguage = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   `
+
 const NaviEng = styled.div`
     grid-column: 2;
   `
@@ -119,11 +135,9 @@ const ham = css`
     margin: 6px 0;
 `
 
-
 const HambugerTop = styled.div<{ hamClick: boolean }>`
     ${ham}
     transition:all 0.5s;
-
     ${ p => p.hamClick && css` transform: rotate(-45deg) translate(-9px, 6px);`}
   `
 
@@ -136,6 +150,5 @@ const HambugerMiddel = styled.div<{ hamClick: boolean }>`
 const HambugerBouttom = styled.div<{ hamClick: boolean }>`
     ${ham}
     transition:all 0.5s;
-
     ${ p => p.hamClick && css`transform: rotate(45deg) translate(-8px, -8px);`}
   `
