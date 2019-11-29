@@ -1,31 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Img1 from '../Img/italy01.png'
 import Img2 from '../Img/italy02.png'
 import Img3 from '../Img/italy03.png'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Main: React.FC = (props) => {
   const Imgs = [Img1, Img2, Img3]
   const [imgNum, setImgNum] = useState(0)
 
-  useEffect(() => {
-    for (let i = 0; i <= Imgs.length; i++) {
-      setTimeout(() => {
-        setImgNum(i)
-        console.log("111", imgNum);
-      }, 2000);
+  const slideShow = (imgNum: number) => {
+    if (imgNum >= Imgs.length) {
+      console.log("inner", imgNum);
+      setImgNum(0)
+    } else if (imgNum < 0) {
+      setImgNum(Imgs.length - 1)
+    } else {
+      setImgNum(imgNum)
     }
-    console.log("222", imgNum);
-  }, [imgNum])
-
+  }
 
   return (
     <Wapper>
-      {/* <ImgBox img={image} /> */}
-      <ImgBox2 src={Imgs[imgNum]} />
-      <Dot col="5" />
-      <Dot col="6" />
-      <Dot col="7" />
+      <PrevBox imgNum={imgNum} />
+      <NowBox imgNum={imgNum} />
+      <NextBox imgNum={imgNum} />
+      <PreButton onClick={(e) => slideShow(imgNum - 1)} >&#10094;</PreButton>
+      {console.log("111", imgNum)}
+      <NextButton onClick={(e) => slideShow(imgNum + 1)} >&#10095;</NextButton>
     </Wapper>
   );
 }
@@ -35,21 +36,46 @@ const Wapper = styled.div`
   grid-auto-rows: auto;
   grid-gap: 1rem;
   justify-content: center;
+  position: relative;
+  max-width: 1920px;
 `
-
-const ImgBox2 = styled.img`
+const PrevBox = styled.div<{ imgNum: number }>`
+  ${p => p.imgNum === 0 ? css`display: block;` : css`display: none;`}
   grid-column: 1 / 13;
-  width: 500px;
+  grid-row: 1;
+  background-position: center center;
+  background-image: url(${Img1});
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 50vw;
   height: 300px;
 `
-// const ImgBox = styled.div<{ img: string }>`
-//   grid-column: 1 / 13;
-//   background-position: center center;
-//   background-image: url(${img});
-//   background-repeat: no-repeat;
-//   width: 1000px;
-//   height: 300px;
-// `
+const NowBox = styled.div<{ imgNum: number }>`
+  ${p => p.imgNum === 1 ? css`display: block;` : css`display: none;`}
+  grid-column: 1 / 13;
+  grid-row: 1;
+  background-position: center center;
+  background-image: url(${Img2});
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 50vw;
+  height: 300px;
+`
+const NextBox = styled.div<{ imgNum: number }>`
+  ${p => p.imgNum === 2 ? css`display: block;` : css`display: none;`}
+  grid-column: 1 / 13;
+  grid-row: 1;
+  background-position: center center;
+  background-image: url(${Img3});
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 50vw;
+  height: 300px;
+`
+
 const Dot = styled.div<{ col: string }>`
   display: grid;
   grid-column: ${props => props.col};
@@ -61,5 +87,43 @@ const Dot = styled.div<{ col: string }>`
   background-color: #bbb;
   border-radius: 50%;
 `
+const PreButton = styled.div`
+  grid-column: 1;
+  grid-row: 1;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  :hover{
+    background-color: rgba(0,0,0,0.8);
+  }
+`
 
+const NextButton = styled.div`
+  grid-column: 12;
+  grid-row: 1;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 3px 0 0 3px;
+  user-select: none;
+  :hover{
+    background-color: rgba(0,0,0,0.8);
+  }
+`
 export default Main
