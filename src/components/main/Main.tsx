@@ -16,8 +16,9 @@ const Main: React.FC = () => {
     } else if (pageNum < 0) {
       setPageNum(2)
     } else {
-      setPageNum(pageNum)
+      setPageNum(imgNum)
     }
+
     if (imgNum >= Imgs.length) {
       setImgNum(0)
     } else if (imgNum < 0) {
@@ -29,9 +30,9 @@ const Main: React.FC = () => {
 
   return (
     <Wapper>
-      <PrevBox pageNum={pageNum} />
-      <NowBox pageNum={pageNum} />
-      <NextBox pageNum={pageNum} />
+      <PrevBox pageNum={pageNum} imgNum={imgNum} Imgs={Imgs} />
+      <NowBox pageNum={pageNum} imgNum={imgNum} Imgs={Imgs} />
+      <NextBox pageNum={pageNum} imgNum={imgNum} Imgs={Imgs} />
       <PreButton onClick={(e) => slideShow(imgNum - 1, pageNum - 1)} >&#10094;</PreButton>
       <NextButton onClick={(e) => slideShow(imgNum + 1, pageNum + 1)} >&#10095;</NextButton>
     </Wapper>
@@ -46,36 +47,36 @@ const Wapper = styled.div`
   position: relative;
   max-width: 1920px;
 `
-const PrevBox = styled.div<{ pageNum: number }>`
+const PrevBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string> }>`
   ${p => p.pageNum === 0 ? css`display: block;` : css`display: none;`}
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
-  background-image: url(${Cathedral});
+  background-image: url(${props => props.Imgs[props.imgNum]});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   width: 50vw;
   height: 300px;
 `
-const NowBox = styled.div<{ pageNum: number }>`
+const NowBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string> }>`
   ${p => p.pageNum === 1 ? css`display: block;` : css`display: none;`}
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
-  background-image: url(${Venezia});
+  background-image: url(${props => props.Imgs[props.imgNum]});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   width: 50vw;
   height: 300px;
 `
-const NextBox = styled.div<{ pageNum: number }>`
-  ${p => p.pageNum === 2 ? css`display: block;` : css`display: none;`}
+const NextBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string> }>`
+  ${p => p.pageNum >= 2 ? css`display: block;` : css`display: none;`}
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
-  background-image: url(${Colosseum});
+  background-image: url(${props => props.Imgs[props.imgNum]});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
