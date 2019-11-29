@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import Img1 from '../Img/italy01.png'
-import Img2 from '../Img/italy02.png'
-import Img3 from '../Img/italy03.png'
+import Cathedral from '../Img/italy01.png'
+import Venezia from '../Img/italy02.png'
+import Colosseum from '../Img/italy03.png'
+import Santorini from '../Img/italy04.png'
 import styled, { css } from 'styled-components'
 
 const Main: React.FC = () => {
-  const Imgs = [Img1, Img2, Img3]
+  const Imgs = [Cathedral, Venezia, Colosseum, Santorini]
   const [imgNum, setImgNum] = useState(0)
   const [pageNum, setPageNum] = useState(0)
 
@@ -50,7 +51,7 @@ const PrevBox = styled.div<{ pageNum: number }>`
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
-  background-image: url(${Img1});
+  background-image: url(${Cathedral});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -62,7 +63,7 @@ const NowBox = styled.div<{ pageNum: number }>`
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
-  background-image: url(${Img2});
+  background-image: url(${Venezia});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -74,7 +75,7 @@ const NextBox = styled.div<{ pageNum: number }>`
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
-  background-image: url(${Img3});
+  background-image: url(${Colosseum});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
