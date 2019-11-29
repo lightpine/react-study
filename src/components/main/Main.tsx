@@ -28,9 +28,9 @@ const Main: React.FC = () => {
 
   return (
     <Wapper>
-      <PrevBox imgNum={imgNum} />
-      <NowBox imgNum={imgNum} />
-      <NextBox imgNum={imgNum} />
+      <PrevBox pageNum={pageNum} />
+      <NowBox pageNum={pageNum} />
+      <NextBox pageNum={pageNum} />
       <PreButton onClick={(e) => slideShow(imgNum - 1, pageNum - 1)} >&#10094;</PreButton>
       <NextButton onClick={(e) => slideShow(imgNum + 1, pageNum + 1)} >&#10095;</NextButton>
     </Wapper>
@@ -45,8 +45,8 @@ const Wapper = styled.div`
   position: relative;
   max-width: 1920px;
 `
-const PrevBox = styled.div<{ imgNum: number }>`
-  ${p => p.imgNum === 0 ? css`display: block;` : css`display: none;`}
+const PrevBox = styled.div<{ pageNum: number }>`
+  ${p => p.pageNum === 0 ? css`display: block;` : css`display: none;`}
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
@@ -57,8 +57,8 @@ const PrevBox = styled.div<{ imgNum: number }>`
   width: 50vw;
   height: 300px;
 `
-const NowBox = styled.div<{ imgNum: number }>`
-  ${p => p.imgNum === 1 ? css`display: block;` : css`display: none;`}
+const NowBox = styled.div<{ pageNum: number }>`
+  ${p => p.pageNum === 1 ? css`display: block;` : css`display: none;`}
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
@@ -69,8 +69,8 @@ const NowBox = styled.div<{ imgNum: number }>`
   width: 50vw;
   height: 300px;
 `
-const NextBox = styled.div<{ imgNum: number }>`
-  ${p => p.imgNum === 2 ? css`display: block;` : css`display: none;`}
+const NextBox = styled.div<{ pageNum: number }>`
+  ${p => p.pageNum === 2 ? css`display: block;` : css`display: none;`}
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
