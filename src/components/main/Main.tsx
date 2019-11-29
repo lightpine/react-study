@@ -3,20 +3,23 @@ import Cathedral from '../Img/italy01.png'
 import Venezia from '../Img/italy02.png'
 import Colosseum from '../Img/italy03.png'
 import Santorini from '../Img/italy04.png'
-import styled, { css } from 'styled-components'
+import Milano from '../Img/italy05.png'
+import styled, { css, keyframes } from 'styled-components'
+
+
 
 const Main: React.FC = () => {
-  const Imgs = [Cathedral, Venezia, Colosseum, Santorini]
+  const Imgs = [Cathedral, Venezia, Colosseum, Santorini, Milano]
   const [imgNum, setImgNum] = useState(0)
   const [pageNum, setPageNum] = useState(0)
 
-  const slideShow = (pageNum: number, imgNum: number) => {
+  const slideShow = (imgNum: number, pageNum: number) => {
     if (pageNum >= 3) {
       setPageNum(0)
     } else if (pageNum < 0) {
       setPageNum(2)
     } else {
-      setPageNum(imgNum)
+      setPageNum(pageNum)
     }
 
     if (imgNum >= Imgs.length) {
@@ -38,6 +41,14 @@ const Main: React.FC = () => {
     </Wapper>
   );
 }
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
 const Wapper = styled.div`
   display: grid;
   grid-template-columns: repeat(12 1fr);
@@ -56,8 +67,9 @@ const PrevBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  width: 50vw;
+  width: 70vw;
   height: 300px;
+  animation: 1s ${FadeIn} ease-in-out;
 `
 const NowBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string> }>`
   ${p => p.pageNum === 1 ? css`display: block;` : css`display: none;`}
@@ -68,8 +80,9 @@ const NowBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string>
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  width: 50vw;
+  width: 70vw;
   height: 300px;
+  animation: 1s ${FadeIn} ease-in-out;
 `
 const NextBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string> }>`
   ${p => p.pageNum >= 2 ? css`display: block;` : css`display: none;`}
@@ -80,8 +93,9 @@ const NextBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  width: 50vw;
+  width: 70vw;
   height: 300px;
+  animation: 1s ${FadeIn} ease-in-out;
 `
 
 const Dot = styled.div<{ col: string }>`
