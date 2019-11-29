@@ -9,7 +9,14 @@ const Main: React.FC = () => {
   const [imgNum, setImgNum] = useState(0)
   const [pageNum, setPageNum] = useState(0)
 
-  const slideShow = (imgNum: number) => {
+  const slideShow = (pageNum: number, imgNum: number) => {
+    if (pageNum >= 3) {
+      setPageNum(0)
+    } else if (pageNum < 0) {
+      setPageNum(2)
+    } else {
+      setPageNum(pageNum)
+    }
     if (imgNum >= Imgs.length) {
       setImgNum(0)
     } else if (imgNum < 0) {
@@ -24,8 +31,8 @@ const Main: React.FC = () => {
       <PrevBox imgNum={imgNum} />
       <NowBox imgNum={imgNum} />
       <NextBox imgNum={imgNum} />
-      <PreButton onClick={(e) => slideShow(imgNum - 1)} >&#10094;</PreButton>
-      <NextButton onClick={(e) => slideShow(imgNum + 1)} >&#10095;</NextButton>
+      <PreButton onClick={(e) => slideShow(imgNum - 1, pageNum - 1)} >&#10094;</PreButton>
+      <NextButton onClick={(e) => slideShow(imgNum + 1, pageNum + 1)} >&#10095;</NextButton>
     </Wapper>
   );
 }
