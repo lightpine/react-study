@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Img from '../Img/italy01.png'
 import styled from 'styled-components'
+import Dot from './Dots'
 
 const Main: React.FC = () => {
   return (
-    <ImgBox />
+    <Fragment>
+      <ImgBox />
+      <Dot />
+    </Fragment>
   );
 }
 const ImgBox = styled.div`
