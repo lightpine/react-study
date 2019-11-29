@@ -36,8 +36,8 @@ const Main: React.FC = () => {
       <PrevBox pageNum={pageNum} imgNum={imgNum} Imgs={Imgs} />
       <NowBox pageNum={pageNum} imgNum={imgNum} Imgs={Imgs} />
       <NextBox pageNum={pageNum} imgNum={imgNum} Imgs={Imgs} />
-      <PreButton onClick={(e) => slideShow(imgNum - 1, pageNum - 1)} >&#10094;</PreButton>
-      <NextButton onClick={(e) => slideShow(imgNum + 1, pageNum + 1)} >&#10095;</NextButton>
+      <PreButton onClick={(e) => slideShow(imgNum - 1, pageNum - 1)} col={1}>&#10094;</PreButton>
+      <NextButton onClick={(e) => slideShow(imgNum + 1, pageNum + 1)} col={12}>&#10095;</NextButton>
     </Wapper>
   );
 }
@@ -58,44 +58,31 @@ const Wapper = styled.div`
   position: relative;
   max-width: 1920px;
 `
-const PrevBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string> }>`
-  ${p => p.pageNum === 0 ? css`display: block;` : css`display: none;`}
+const Box = css`
   grid-column: 1 / 13;
   grid-row: 1;
   background-position: center center;
-  background-image: url(${props => props.Imgs[props.imgNum]});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   width: 70vw;
   height: 300px;
   animation: 1s ${FadeIn} ease-in-out;
+`
+const PrevBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string> }>`
+  ${p => p.pageNum === 0 ? css`display: block;` : css`display: none;`}
+  background-image: url(${props => props.Imgs[props.imgNum]});
+  ${Box}
 `
 const NowBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string> }>`
   ${p => p.pageNum === 1 ? css`display: block;` : css`display: none;`}
-  grid-column: 1 / 13;
-  grid-row: 1;
-  background-position: center center;
   background-image: url(${props => props.Imgs[props.imgNum]});
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  width: 70vw;
-  height: 300px;
-  animation: 1s ${FadeIn} ease-in-out;
+  ${Box}
 `
 const NextBox = styled.div<{ pageNum: number, imgNum: number, Imgs: Array<string> }>`
   ${p => p.pageNum >= 2 ? css`display: block;` : css`display: none;`}
-  grid-column: 1 / 13;
-  grid-row: 1;
-  background-position: center center;
   background-image: url(${props => props.Imgs[props.imgNum]});
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  width: 70vw;
-  height: 300px;
-  animation: 1s ${FadeIn} ease-in-out;
+  ${Box}
 `
 
 const Dot = styled.div<{ col: string }>`
@@ -109,8 +96,8 @@ const Dot = styled.div<{ col: string }>`
   background-color: #bbb;
   border-radius: 50%;
 `
-const PreButton = styled.div`
-  grid-column: 1;
+
+const Buttons = css`
   grid-row: 1;
   cursor: pointer;
   position: absolute;
@@ -122,30 +109,21 @@ const PreButton = styled.div`
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
   user-select: none;
   :hover{
     background-color: rgba(0,0,0,0.8);
   }
 `
 
-const NextButton = styled.div`
-  grid-column: 12;
-  grid-row: 1;
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
+const PreButton = styled.div<{ col: number }>`
+  grid-column: ${p => p.col};
+  ${Buttons}
+  border-radius: 0 3px 3px 0;
+`
+
+const NextButton = styled.div<{ col: number }>`
+  grid-column: ${p => p.col};
+  ${Buttons}
   border-radius: 3px 0 0 3px;
-  user-select: none;
-  :hover{
-    background-color: rgba(0,0,0,0.8);
-  }
 `
 export default Main
