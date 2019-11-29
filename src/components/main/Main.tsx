@@ -4,13 +4,13 @@ import Img2 from '../Img/italy02.png'
 import Img3 from '../Img/italy03.png'
 import styled, { css } from 'styled-components'
 
-const Main: React.FC = (props) => {
+const Main: React.FC = () => {
   const Imgs = [Img1, Img2, Img3]
   const [imgNum, setImgNum] = useState(0)
+  const [pageNum, setPageNum] = useState(0)
 
   const slideShow = (imgNum: number) => {
     if (imgNum >= Imgs.length) {
-      console.log("inner", imgNum);
       setImgNum(0)
     } else if (imgNum < 0) {
       setImgNum(Imgs.length - 1)
@@ -25,7 +25,6 @@ const Main: React.FC = (props) => {
       <NowBox imgNum={imgNum} />
       <NextBox imgNum={imgNum} />
       <PreButton onClick={(e) => slideShow(imgNum - 1)} >&#10094;</PreButton>
-      {console.log("111", imgNum)}
       <NextButton onClick={(e) => slideShow(imgNum + 1)} >&#10095;</NextButton>
     </Wapper>
   );
