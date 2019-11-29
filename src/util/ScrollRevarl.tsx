@@ -11,24 +11,21 @@ interface Props {
 type TYPE = "Fade" | "Pra"
 
 const OnhReveal: React.FC<Props> = (props) => {
+  const getType = (type: TYPE) => {
+    switch (type) {
+      case "Fade":
+        return css``
+      case "Pra":
+        return css``
+      default:
+        return css``
+    }
+  }
 
   const Wapper = styled(props.styled) <{ isOnscreen: boolean }>`
-    transition: all;
-    opacity:0;
-    transition-duration: 1000ms;
-    top: ${p => -(p.scrollY * 0.2)};
-    ${p => (p.type === "Pra") && css`
-    height: 150vh;
-    max-height: 100%;
-    overflow-x: hidden;
-    perspective: 1px;
-    perspective-origin: center top;
-    transform-style: preserve-3d;
-    `}
-    ${p => p.isOnscreen && css`
-    opacity:1;
-    `}
-`
+    ${getType(props.type)}
+    `
+
   const InnerFC: React.FC = (props) => {
     const { scrollY } = useContext(scrollContext)
     const wapperRef = useRef<HTMLElement>(null)

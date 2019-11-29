@@ -1,31 +1,20 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Img from '../Image/night_place.png'
 import Img2 from '../Image/venice20.png'
 import Img3 from '../Image/venezia5.png'
 import OnhReveal from '../../util/ScrollRevarl'
-
+import ParallaxScroll from '../../util/Parallax'
 
 const Contents: React.FC = (props) => {
 
-
   return (
     <OnhReveal type="Fade" styled={Wapper}>
-      {/* <Spce /> */}
-      <OnhReveal type="Pra" styled={Wapper2}>
-        <Content1 />
-      </OnhReveal>
+      <Spce />
+      <ParallaxScroll styled={Content1} />
       <ContentText>
         "hello" thie is Venecia! velra venecia!
         </ContentText>
-      {/* <Content2 />
-      <ContentText>
-        "hello" thie is Venecia! velra venecia!
-      </ContentText>
-      <Content3 />
-      <ContentText>
-        "hello" thie is Venecia! velra venecia!
-      </ContentText> */}
       <Spce />
     </OnhReveal>
   )
@@ -39,26 +28,18 @@ const Wapper = styled.div`
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 1rem;
   grid-auto-rows: auto;
-  
-`
-const Wapper2 = styled.div`
-  grid-column: 3/ 11;
-  height: 50vh;
 `
 
 const Content1 = styled.div`
-  /* grid-column: 3/ 11; */
+  grid-column: 3/ 11;
   height: 50vh;
   background-image: url(${Img});
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  /* overflow: hidden; */
-
-  /* :hover {
-  transform: scale(1.06);
+  :hover {
   opacity: 0.4;
-  } */
+  }
 
 `
 // const Content2 = styled.div`
