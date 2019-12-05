@@ -38,6 +38,10 @@ const Main: React.FC = () => {
       <NextBox pageNum={pageNum} imgNum={imgNum} Imgs={Imgs} />
       <PreButton onClick={(e) => slideShow(imgNum - 1, pageNum - 1)} col={1}>&#10094;</PreButton>
       <NextButton onClick={(e) => slideShow(imgNum + 1, pageNum + 1)} col={12}>&#10095;</NextButton>
+      <Dot col="5"/>
+      <Dot col="6"/>
+      <Dot col="7"/>
+      <Dot col="8"/>
     </Wapper>
   );
 }
@@ -95,6 +99,11 @@ const Dot = styled.div<{ col: string }>`
   margin: 0 2px;
   background-color: #bbb;
   border-radius: 50%;
+  :hover{
+    cursor: pointer;
+    background-color: black;
+
+  }
 `
 
 const Buttons = css`
